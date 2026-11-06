@@ -42,7 +42,6 @@ button {
   outline-offset: 3px;
 }
 
-/* Hlavička a košík */
 header {
   position: fixed;
   inset: env(safe-area-inset-top, 0px) 0 auto;
@@ -91,9 +90,8 @@ header {
   40% { transform: scale(1.15); }
 }
 
-/* Scéna a animace */
 #track {
-  height: 600vh; /* Zvýšeno z 500vh pro další sekci (příběh značky) */
+  height: 600vh; 
   position: relative;
 }
 
@@ -105,7 +103,6 @@ header {
   overflow: hidden;
 }
 
-/* Plynulé vlající světlo, optimalizované pro GPU */
 #glow { 
     position: absolute; 
     width: 60vmax; height: 60vmax; 
@@ -114,7 +111,6 @@ header {
     left: 0; top: 0; 
     pointer-events: none; 
     transform: translate(-50%, -50%); 
-    /* Necháme jen opacity. Pohyb už nebude řídit CSS, ale plynulý JavaScript */ 
     transition: opacity 0.4s;
  }
 
@@ -138,7 +134,7 @@ header {
 }
 
 .scene[data-i="4"] .name {
-  opacity: 0.15; /* Snížená průhlednost pro nadpis Maison Lumen na pozadí */
+  opacity: 0.15; 
 }
 
 .bottle {
@@ -164,7 +160,6 @@ header {
   50% { translate: 0 -14px; }
 }
 
-/* Noty (štítky) a nákupní část */
 .note {
   position: absolute;
   padding: 8px 14px;
@@ -210,7 +205,6 @@ header {
   margin-bottom: 4px;
 }
 
-/* Příběh značky (nová sekce) */
 .story-text {
   position: absolute;
   left: 50%;
@@ -269,7 +263,6 @@ header {
   min-width: 110px;
 }
 
-/* Tlačítka */
 .cta {
   padding: 14px 28px;
   border-radius: 99px;
@@ -301,7 +294,6 @@ header {
   color: var(--bg);
 }
 
-/* Navigace */
 #dots {
   position: absolute;
   right: clamp(12px, 3vw, 32px);
@@ -351,7 +343,6 @@ footer button {
   text-decoration: underline;
 }
 
-/* Překryv (Shade) a Sidebary (Drawer) */
 #shade {
   position: fixed;
   inset: 0;
@@ -406,7 +397,6 @@ footer button {
   padding: 0 6px;
 }
 
-/* Položky košíku */
 .item {
   display: grid;
   grid-template-columns: 48px 1fr auto;
@@ -454,7 +444,6 @@ footer button {
   margin-top: 10px;
 }
 
-/* Formulářové prvky */
 label {
   display: block;
   font-size: 12px;
@@ -541,7 +530,6 @@ td {
   vertical-align: top;
 }
 
-/* Modální detail produktu */
 #detail {
   position: fixed;
   inset: 0;
@@ -705,7 +693,6 @@ td {
   transition: transform 0.7s cubic-bezier(0.5, 0, 0.8, 0.4), opacity 0.7s;
 }
 
-/* Toast notifikace */
 #toast {
   position: fixed;
   bottom: 30px;
@@ -728,7 +715,6 @@ td {
   opacity: 1;
 }
 
-/* Responzivita a přístupnost */
 @media (max-width: 800px) {
   #detail {
     grid-template-columns: 1fr;

@@ -1,5 +1,3 @@
-// --- 1. DATA PRODUKTŮ A CENY ---
-
 const P = [
   {
     id: "fig",
@@ -72,10 +70,10 @@ const P = [
   },
   {
     id: "brand",
-    type: "brand", /* Označení, že nejde o parfém */
+    type: "brand", 
     n: "Maison Lumen",
-    bg: "#0a0a0a", /* Elegantní hluboká černá */
-    acc: "#d4af37", /* Zlatý akcent */
+    bg: "#0a0a0a", 
+    acc: "#d4af37", 
     title: "Objevte Svou Vůni",
     p1: "Za značkou Maison Lumen stojí vášeň pro vůně a touha po autentičnosti. Čerpáme od nejlepších dodavatelů a spolupracujeme s talentovanými parfuméry, abychom vám přinesli jedinečné zážitky z vůní.",
     p2: "Specialisté na parfémy vybrali pro vás ty nejkvalitnější ingredience a vytvořili kolekci, která osloví každého milovníka vůní."
@@ -133,7 +131,6 @@ const SZ = [[30, 1], [50, 1.14], [100, 1.63]];
 const DEL = { zas: ["Zásilkovna – výdejní místo", 79], ppl: ["PPL – doručení domů", 99] };
 const PAY = { card: ["Platební karta (ukázka)", 0], bank: ["Bankovní převod", 0], cod: ["Dobírka", 39] };
 
-// --- 2. ZÁKLADNÍ POMOCNÉ FUNKCE A STAV ---
 
 const $ = s => document.querySelector(s);
 const sizesFor = p => p.sizes || SZ;
@@ -153,7 +150,6 @@ let isAdmin = false;
 let dtab = 0;
 let duse = "Den";
 
-// Načtení košíku
 try {
   cart = JSON.parse(localStorage.getItem("cart") || "[]");
 } catch (e) {}
@@ -163,18 +159,15 @@ const saveCart = () => {
   catch (e) {}
 };
 
-// --- 3. VYKRESLOVÁNÍ PRODUKTŮ A SCÉNY ---
 
 
 const bottleHTML = p => `<img src="img/${p.id}.png" alt="${p.n}">`;
 
 function build() {
-// ... zbytek kódu pokračuje beze změny
 }
 
 function build() {
   $("#scenes").innerHTML = P.map((p, i) => {
-    // Vykreslení příběhu značky
     if (p.type === 'brand') {
       return `
         <div class="scene" data-i="${i}">
@@ -188,7 +181,6 @@ function build() {
       `;
     }
     
-    // Vykreslení klasického parfému
     return `
       <div class="scene" data-i="${i}">
         <div class="name" aria-hidden="true">${p.n.split(" ")[0]}</div>
@@ -216,7 +208,6 @@ function build() {
   `).join("");
 }
 
-// --- 4. SCROLL ANIMACE A INTERAKCE ---
 
 function lerp(a, b, t) { return a + (b - a) * t; }
 function hex(h) { return [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16)); }
@@ -249,23 +240,19 @@ document.querySelectorAll(".scene").forEach((s, k) => {
     const d = k - p, a = Math.abs(d), o = Math.max(0, 1 - a * 1.5);
     s.style.opacity = o;
     s.style.visibility = o ? "visible" : "hidden";
-    
-    // Animace velkého jména na pozadí
+
     const nameEl = s.querySelector(".name");
     if (nameEl) nameEl.style.transform = `translate(-50%,-50%) translateY(${d * -30}vh) scale(${1 - a * 0.15})`;
     
-    // Animace flakonu (pouze u parfémů)
     const botEl = s.querySelector(".bottle");
     if (botEl) botEl.style.transform = `translate(-50%,-50%) translate(${mx * 18}px,${my * 12 + d * 45}vh) rotate(${d * -28 + mx * 6}deg) scale(${1 - a * 0.25})`;
     
-    // Animace textu příběhu (pomalé připlouvání a reakce na myš)
     const textEl = s.querySelector(".story-text");
     if (textEl) textEl.style.transform = `translate(-50%,-50%) translateY(${d * 30}vh) translate(${mx * -12}px, ${my * -12}px)`;
     
     s.style.pointerEvents = a < 0.5 ? "auto" : "none";
   });
   
-  // Plynulé skrytí nákupního panelu (#buy) na poslední scéně
   const buyOp = Math.max(0, Math.min(1, (P.length - 1 - p) * 2));
   $("#buy").style.opacity = buyOp;
   $("#buy").style.pointerEvents = buyOp < 0.5 ? "none" : "auto";
@@ -308,7 +295,6 @@ addEventListener("pointermove", e => {
 function sync() {
   document.querySelectorAll("#dots button").forEach((b, i) => b.classList.toggle("on", i == cur));
   
-  // Změní cenu jen tehdy, pokud jde o parfém
   if (P[cur].type !== 'brand') {
     const currentSizes = sizesFor(P[cur]);
     size = Math.min(size, currentSizes.length - 1);
@@ -330,7 +316,6 @@ function go(i) {
   scrollTo({ top: tr.offsetTop + max * i / (P.length - 1), behavior: "smooth" });
 }
 
-// --- 5. OBSLUHA KLIKNUTÍ A KLÁVES ---
 
 document.addEventListener("click", e => {
   const bt = e.target.closest(".bottle");
@@ -361,7 +346,6 @@ addEventListener("keydown", e => {
   }
 });
 
-// --- 6. KOŠÍK A NÁKUPNÍ PROCES ---
 
 function count() {
   const c = cart.reduce((a, l) => a + l.q, 0);
@@ -377,7 +361,6 @@ $("#add").onclick = e => {
   if (l) l.q++;
   else cart.push({ k, id: p.id, s: size, q: 1 });
   
-  // Animace letící tečky
   const dot = document.createElement("div");
   dot.className = "fly";
   const a = e.currentTarget.getBoundingClientRect();
@@ -392,7 +375,6 @@ $("#add").onclick = e => {
     dot.style.opacity = 0.3;
   });
   
-  // Zobrazení toast notifikace
   const toast = $("#toast");
   toast.textContent = `${p.n} (${sizesFor(p)[size][0]} ml) přidán do košíku`;
   toast.classList.add("show");
@@ -478,7 +460,6 @@ $("#cartBody").addEventListener("click", e => {
   renderCart();
 });
 
-// --- 7. POKLADNA A DOKONČENÍ OBJEDNÁVKY ---
 
 function totals(del, pay) {
   const s = sub();
@@ -624,7 +605,6 @@ async function submit() {
   `;
 }
 
-// --- 8. DETAIL PRODUKTU ---
 
 const mt = (l, v, w) => `<div class="m"><span>${l}</span><i><b style="--w:${w}%"></b></i></div>`;
 
@@ -707,7 +687,6 @@ $("#detail").addEventListener("pointermove", e => {
   $("#dbot").style.transform = `translate(${x * -34}px, ${y * -22}px) rotate(${x * 14}deg)`;
 });
 
-// --- 9. ADMIN ROZHRANÍ (UKÁZKA) ---
 
 function renderAdmin() {
   $("#adminBody").innerHTML = `
@@ -764,7 +743,6 @@ $("#adminBtn").onclick = () => {
   open("#admin");
 };
 
-// --- 10. INICIALIZACE A SPUŠTĚNÍ ---
 
 build();
 count();
