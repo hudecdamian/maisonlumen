@@ -1,0 +1,740 @@
+:root {
+  --bg: #1f3b2d;
+  --ink: #f3f1ea;
+  --acc: #c9d8a8;
+  --shade: rgba(0, 0, 0, 0.25);
+  --sp: max(env(safe-area-inset-top, 0px), 0px);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scrollbar-gutter: stable; /* UX: Zabraňuje cukání stránky */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.5 'Hanken Grotesk', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 3px;
+}
+
+/* Hlavička a košík */
+header {
+  position: fixed;
+  inset: env(safe-area-inset-top, 0px) 0 auto;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px clamp(16px, 4vw, 48px);
+}
+
+.logo {
+  font: 700 22px Syne, 'Helvetica Neue', sans-serif;
+}
+
+#cartBtn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid currentColor;
+  border-radius: 99px;
+  transition: 0.25s;
+}
+
+#cartBtn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+#cartBtn b {
+  min-width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: var(--acc);
+  color: #111;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+#cartBtn.bump {
+  animation: bump 0.4s;
+}
+
+@keyframes bump {
+  40% { transform: scale(1.15); }
+}
+
+/* Scéna a animace */
+#track {
+  height: 500vh;
+  position: relative;
+}
+
+#stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+#glow {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent);
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s, left 0.6s ease-out, top 0.6s ease-out;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.name {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 100%;
+  text-align: center;
+  font: 700 clamp(60px, 15vw, 250px)/0.9 Syne, 'Helvetica Neue', sans-serif;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  opacity: 0.95;
+}
+
+.bottle {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(46vw, 260px);
+  aspect-ratio: 1 / 2;
+  transform-origin: 50% 90%;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.bottle > * {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 40px 40px var(--shade));
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { translate: 0 -14px; }
+}
+
+/* Noty (štítky) a nákupní část */
+.note {
+  position: absolute;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  font-size: 13px;
+  pointer-events: auto;
+  cursor: default;
+  transition: 0.3s;
+}
+
+.note:hover, .note.on {
+  background: var(--ink);
+  color: var(--bg);
+  transform: scale(1.08);
+}
+
+.note small {
+  display: block;
+  opacity: 0.7;
+  font-size: 11px;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.note:hover small, .note.on small {
+  max-height: 40px;
+}
+
+.copy {
+  position: absolute;
+  left: clamp(16px, 4vw, 48px);
+  bottom: 132px;
+  max-width: 300px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.copy h3 {
+  font: 700 22px Syne, 'Helvetica Neue', sans-serif;
+  margin-bottom: 4px;
+}
+
+#buy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px clamp(16px, 4vw, 48px) calc(16px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(transparent, var(--shade));
+}
+
+.sizes {
+  display: flex;
+  gap: 6px;
+}
+
+.sizes button {
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 99px;
+  transition: 0.2s;
+}
+
+.sizes button[aria-pressed=true] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+#price {
+  font: 28px Syne, 'Helvetica Neue', sans-serif;
+  min-width: 110px;
+}
+
+/* Tlačítka */
+.cta {
+  padding: 14px 28px;
+  border-radius: 99px;
+  background: var(--acc);
+  color: #111;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px var(--shade);
+}
+
+.cta:disabled {
+  opacity: 0.5;
+  transform: none;
+}
+
+.ghost {
+  padding: 14px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 99px;
+  transition: 0.25s;
+}
+
+.ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Navigace */
+#dots {
+  position: absolute;
+  right: clamp(12px, 3vw, 32px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 5;
+}
+
+#dots button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  transition: 0.3s;
+}
+
+#dots button.on {
+  background: var(--ink);
+  height: 34px;
+  border-radius: 99px;
+}
+
+.hint {
+  position: absolute;
+  bottom: 112px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  opacity: 0.7;
+  transition: opacity 0.4s;
+}
+
+footer {
+  padding: 48px clamp(16px, 4vw, 48px) 90px;
+  font-size: 13px;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+footer button {
+  text-decoration: underline;
+}
+
+/* Překryv (Shade) a Sidebary (Drawer) */
+#shade {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 30;
+}
+
+#shade.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(440px, 100%);
+  background: #f3f1ea;
+  color: #1b1b1b;
+  z-index: 40;
+  transform: translateX(105%);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 22px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+.drawer.on {
+  transform: none;
+}
+
+.drawer h2 {
+  font: 700 26px Syne, 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer .x {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.body {
+  flex: 1;
+  overflow: auto;
+  margin: 14px -6px;
+  padding: 0 6px;
+}
+
+/* Položky košíku */
+.item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.133);
+}
+
+.item i {
+  width: 48px;
+  height: 64px;
+  border-radius: 8px;
+  display: block;
+}
+
+.qty {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.qty button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.tot {
+  font: 700 18px 'Hanken Grotesk';
+}
+
+.drawer .cta {
+  background: #1b1b1b;
+  color: #fff;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Formulářové prvky */
+label {
+  display: block;
+  font-size: 12px;
+  margin: 10px 0 3px;
+  opacity: 0.7;
+}
+
+input, select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  transition: border-color 0.2s;
+}
+
+input.invalid {
+  border-color: #b3261e;
+  outline-color: #b3261e;
+}
+
+.g2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.opt {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-top: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.opt input {
+  width: auto;
+}
+
+.opt:has(input:checked) {
+  border-color: #111;
+  background: #fff;
+}
+
+.opt span {
+  margin-left: auto;
+}
+
+.small {
+  font-size: 12px;
+  opacity: 0.65;
+  margin-top: 8px;
+}
+
+.err {
+  color: #b3261e;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.done {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.done h3 {
+  font: 700 30px Syne, 'Helvetica Neue', sans-serif;
+}
+
+table {
+  width: 100%;
+  font-size: 13px;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.133);
+  vertical-align: top;
+}
+
+/* Modální detail produktu */
+#detail {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background: var(--bg);
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  clip-path: circle(0 at var(--cx, 50%) var(--cy, 50%));
+  visibility: hidden;
+  transition: clip-path 0.9s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s 0.9s;
+  overflow: hidden;
+}
+
+#detail.on {
+  clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%));
+  visibility: visible;
+  transition: clip-path 0.9s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s;
+}
+
+.dl {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+#dname {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  font: 700 clamp(56px, 12vw, 190px)/1 Syne, sans-serif;
+  letter-spacing: -0.045em;
+  opacity: 0.16;
+}
+
+#dbot {
+  position: relative;
+  width: min(34vw, 290px);
+  aspect-ratio: 1 / 2;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#dbot > * {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 40px 40px var(--shade));
+  animation: float 5s ease-in-out infinite;
+}
+
+.dr {
+  padding: 130px clamp(20px, 4vw, 64px) calc(32px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+#dx {
+  position: absolute;
+  top: calc(78px + env(safe-area-inset-top, 0px));
+  right: clamp(16px, 4vw, 48px);
+  font-size: 32px;
+  line-height: 1;
+  z-index: 2;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  padding: 9px 18px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: 0.3s;
+}
+
+.tabs button[aria-pressed=true] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.py {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateY(14px);
+  animation: in 0.7s var(--d, 0s) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes in {
+  to { opacity: 1; transform: none; }
+}
+
+.py em {
+  display: inline-block;
+  font-style: normal;
+  margin: 0 6px 6px 0;
+  padding: 5px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.m { padding: 10px 0; }
+
+.m i {
+  display: block;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  margin-top: 7px;
+  overflow: hidden;
+}
+
+.m b {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--acc);
+  animation: fill 1.2s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fill {
+  to { width: var(--w); }
+}
+
+.dp {
+  margin-top: 16px;
+  opacity: 0.85;
+  max-width: 46ch;
+  animation: in 0.8s 0.3s both;
+}
+
+.dbuy {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fly {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--acc);
+  z-index: 60;
+  pointer-events: none;
+  transition: transform 0.7s cubic-bezier(0.5, 0, 0.8, 0.4), opacity 0.7s;
+}
+
+/* Toast notifikace */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 24px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Responzivita a přístupnost */
+@media (max-width: 800px) {
+  #detail {
+    grid-template-columns: 1fr;
+    grid-template-rows: 36% 1fr;
+  }
+  #dbot {
+    width: min(24vw, 130px);
+  }
+  .dr {
+    padding-top: 20px;
+  }
+  #dx {
+    top: calc(70px + env(safe-area-inset-top, 0px));
+  }
+}
+
+@media (max-width: 700px) {
+  .copy { display: none; }
+  .note {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  #price {
+    font-size: 22px;
+    min-width: 0;
+  }
+  .cta {
+    padding: 12px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bottle > * { animation: none; }
+  * { transition: none !important; }
+}
