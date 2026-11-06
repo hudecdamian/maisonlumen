@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Maison Lumen – Kolekce exkluzivních voňavek</title>
+  
+  <!-- SEO a sémantika -->
+  <meta name="description" content="Objevte exkluzivní kolekci voňavek Maison Lumen. Parfémy s příběhem – od chladné zeleně po hřejivou ambru.">
+  <meta property="og:title" content="Maison Lumen – voňavky">
+  <meta property="og:description" content="Chladná zeleň, mořská sůl, hřejivá ambra nebo tichý kosatec. Objevte svůj nový oblíbený parfém.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630/1f3b2d/c9d8a8?text=Maison+Lumen">
+  
+  <!-- Externí fonty -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Propojení na externí CSS styl -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <span class="logo">Maison Lumen</span>
+    <button id="cartBtn" aria-label="Otevřít košík">Košík <b id="cnt">0</b></button>
+  </header>
+
+  <!-- Skrytý nadpis pro přístupnost a SEO -->
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Maison Lumen – Kolekce voňavek</h1>
+
+  <main id="track">
+    <article id="stage" aria-label="Kolekce voňavek">
+      <div id="glow"></div>
+      <div id="scenes"></div>
+      <nav id="dots" aria-label="Voňavky"></nav>
+      <div class="hint" id="hint">Rolujte dolů a objevte další vůni</div>
+      
+      <div id="buy">
+        <div class="sizes" id="sizes" role="group" aria-label="Velikost"></div>
+        <div id="price"></div>
+        <button class="ghost" id="more">Detail</button>
+        <button class="cta" id="add">Přidat do košíku</button>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <span>© Maison Lumen · Dopravu zdarma nad 2 500 Kč</span>
+    <button id="adminBtn" hidden>Správa objednávek</button>
+  </footer>
+
+  <section id="detail" role="dialog" aria-label="Detail voňavky">
+    <button id="dx" aria-label="Zavřít detail">×</button>
+    <div class="dl">
+      <div id="dname"></div>
+      <div id="dbot"></div>
+    </div>
+    <div class="dr">
+      <div class="tabs" id="tabs"></div>
+      <div id="dc"></div>
+      <div class="dbuy">
+        <div class="sizes" id="dsizes"></div>
+        <div id="price2" style="font:700 24px Syne,sans-serif"></div>
+        <button class="cta" id="dadd">Přidat do košíku</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="shade"></div>
+  
+  <!-- Postranní panel: Košík -->
+  <aside class="drawer" id="cart" aria-label="Košík">
+    <h2>Košík <button class="x" data-close aria-label="Zavřít">×</button></h2>
+    <div class="body" id="cartBody"></div>
+    <div id="cartFoot"></div>
+  </aside>
+
+  <!-- Postranní panel: Správa -->
+  <aside class="drawer" id="admin" aria-label="Správa">
+    <h2>Správa <button class="x" data-close aria-label="Zavřít">×</button></h2>
+    <div class="body" id="adminBody"></div>
+  </aside>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Propojení na externí JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
