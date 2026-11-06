@@ -3,117 +3,144 @@
 const P = [
   {
     id: "fig",
-    n: "Noir Fig",
+    n: "Prada Paradigme",
     bg: "#1f3b2d",
     acc: "#c9d8a8",
-    base: 990,
-    t: "Fíkový list, zelené mléko, vetiver.",
-    d: "Chladná zeleň a hřejivé dřevo. Voní jako zahrada po dešti.",
+    base: 1750,
+    t: "Kalábrijský bergamot, geránium bourbon, ambrové dřevo.",
+    d: "Citrusová & dřevitá parfémová voda s moderním a čistým charakterem.",
     notes: [
-      ["Fíkový list", "svěží, zelený", [8, 58]],
-      ["Mléko z kokosu", "jemné, krémové", [74, 34]],
-      ["Vetiver", "hlubokou zemitou základnu", [12, 22]]
+      ["Bergamot", "kalábrijská jiskra", [8, 58]],
+      ["Geránium", "srdce vůně", [74, 34]],
+      ["Ambrové dřevo", "hřejivý základ", [12, 22]]
     ]
   },
   {
     id: "sel",
-    n: "Sel Marin",
+    n: "Jean Paul Gaultier Le Beau Narcisse",
     bg: "#1d4f6e",
     acc: "#bfe3f2",
-    base: 1090,
-    t: "Mořská sůl, bergamot, bílý cedr.",
-    d: "Vítr, sůl na kůži a slunce na skále. Letní klid ve flakonu.",
+    base: 2690,
+    sizes: [
+      [75, 1],       
+      [125, 1.48]  
+    ],
+    t: "Bergamot, pižmo, tonka fazole.",
+    d: "Citrónová a pižmová parfémová voda s čistým a podmanivým charakterem.",
     notes: [
-      ["Bergamot", "citrusová jiskra", [10, 55]],
-      ["Mořská sůl", "minerální, čistá", [72, 30]],
-      ["Bílý cedr", "suché dřevo", [78, 66]]
+      ["Bergamot", "hlava vůně", [10, 55]],
+      ["Pižmo", "srdce vůně", [72, 30]],
+      ["Tonka fazole", "základ vůně", [78, 66]]
     ]
+
   },
   {
     id: "amb",
-    n: "Ambre Rouge",
+    n: "Armani Emporio Stronger With You Powerfully",
     bg: "#7a2a24",
     acc: "#f2c28b",
-    base: 1290,
-    t: "Ambra, růžový pepř, kadidlo.",
-    d: "Teplá, kořenitá a večerní. Zůstává na šále ještě druhý den.",
+    base: 1750,
+    sizes: [
+      [50, 1],
+      [100, 1.46]
+    ],
+    t: "Višňový akord, mandarinka, levandule, koření.",
+    d: "Dřevitá parfémová voda s podmanivým tónem višně, ambrového dřeva a vanilky.",
     notes: [
-      ["Růžový pepř", "koření v hlavě", [8, 28]],
-      ["Ambra", "sladká, pryskyřičná", [74, 52]],
-      ["Kadidlo", "kouřová hloubka", [14, 68]]
+      ["Višňový akord", "hlava vůně", [8, 28]],
+      ["Levandule", "srdce vůně", [74, 52]],
+      ["Ambrové dřevo", "základ vůně", [14, 68]]
     ]
   },
   {
     id: "iri",
-    n: "Iris Poudre",
+    n: "Valentino Born In Roma Purple Melancholia Uomo",
     bg: "#5a4a86",
     acc: "#e8d9ff",
-    base: 1190,
-    t: "Kořen kosatce, fialka, pižmo.",
-    d: "Pudrová a tichá. Voní jako čisté prádlo a staré dopisy.",
+    base: 1790,
+        sizes: [
+      [50, 1],
+      [100, 1.37]
+    ],
+    t: "Kardamom, lavandin, ambra, kokos.",
+    d: "Aromatická a orientální toaletní voda s podmanivým, hřejivým základem.",
     notes: [
-      ["Kosatec", "pudr a chlad", [10, 40]],
-      ["Fialka", "květinová sladkost", [72, 26]],
-      ["Pižmo", "měkká kůže", [76, 70]]
+      ["Kardamom", "hlava vůně", [10, 40]],
+      ["Lavandin", "srdce vůně", [72, 26]],
+      ["Ambra a kokos", "základ vůně", [76, 70]]
     ]
+  },
+  {
+    id: "brand",
+    type: "brand", /* Označení, že nejde o parfém */
+    n: "Maison Lumen",
+    bg: "#0a0a0a", /* Elegantní hluboká černá */
+    acc: "#d4af37", /* Zlatý akcent */
+    title: "Objevte Svou Vůni",
+    p1: "Za značkou Maison Lumen stojí vášeň pro vůně a touha po autentičnosti. Čerpáme od nejlepších dodavatelů a spolupracujeme s talentovanými parfuméry, abychom vám přinesli jedinečné zážitky z vůní.",
+    p2: "Specialisté na parfémy vybrali pro vás ty nejkvalitnější ingredience a vytvořili kolekci, která osloví každého milovníka vůní."
   }
 ];
 
 const DET = {
   fig: {
-    conc: "Parfémová voda, 15 %", life: 7, sil: 3,
-    top: ["Fíkový list", "Zelená mandarinka"],
-    heart: ["Kokosové mléko", "Fíková šťáva"],
-    base: ["Vetiver", "Cedr"],
-    ing: "Alkohol, parfémová báze, přírodní výtažek z fíkového listu, vetiver, kokosové mléko.",
+    conc: "Parfémová voda", life: 8, sil: 4,
+    top: ["Kalábrijský bergamot"],
+    heart: ["Geránium bourbon"],
+    base: ["Ambrové dřevo"],
+    ing: "Alkohol, parfémová báze, kalábrijský bergamot, geránium bourbon, ambrové dřevo.",
     use: {
-      Den: "Lehká a zelená. Stačí dvě tečky na zápěstí.",
-      Večer: "Vetiver se otevře a vůně zhoustne. Hodí se na kabát i šálu."
+      Den: "Svěží citrusová hlava se skvěle hodí pro denní nošení.",
+      Večer: "Ambrové dřevo se večer krásně rozvine na kůži."
     }
   },
   sel: {
-    conc: "Toaletní voda, 10 %", life: 5, sil: 3,
-    top: ["Bergamot", "Citron"],
-    heart: ["Mořská sůl", "Šalvěj"],
-    base: ["Bílý cedr", "Pižmo"],
-    ing: "Alkohol, parfémová báze, bergamot z Kalábrie, mořská sůl, bílý cedr.",
+    conc: "Parfémová voda", life: 8, sil: 4,
+    top: ["Bergamot"],
+    heart: ["Pižmo"],
+    base: ["Tonka fazole"],
+    ing: "Alkohol, parfémová báze, bergamot, pižmo, tonka fazole.",
     use: {
-      Den: "Ideální na pláž nebo do města v létě. Dejte ji na krk.",
-      Večer: "Zůstává svěží a čistá. Nanášejte po sprše na vlhkou kůži."
+      Den: "Svěží bergamotová hlava se skvěle hodí pro celodenní nošení.",
+      Večer: "Pižmo a tonka fazole se večer krásně rozvinou na pokožce."
     }
   },
   amb: {
-    conc: "Parfém, 20 %", life: 10, sil: 5,
-    top: ["Růžový pepř", "Kardamom"],
-    heart: ["Ambra", "Labdanum"],
-    base: ["Kadidlo", "Vanilka"],
-    ing: "Alkohol, parfémová báze, ambra, růžový pepř, kadidlo, vanilka.",
+    conc: "Parfémová voda", life: 10, sil: 5,
+    top: ["višňový akord", "mandarinka"],
+    heart: ["levandule", "koření"],
+    base: ["ambrové dřevo", "vanilka", "kaštan"],
+    ing: "Alkohol, parfémová báze, višňový akord, mandarinka, levandule, koření, ambrové dřevo, vanilka, kaštan.",
     use: {
-      Den: "Silná vůně, stačí jeden střik. Nanášejte opatrně.",
-      Večer: "Tady se rozvine naplno. Dva střiky za uši a na hrudník."
+      Den: "Výrazná ovocně-kořenitá hlava zanechá skvělý dojem během dne.",
+      Večer: "Ambrové dřevo, vanilka a kaštan se večer rozvinou do hřejivé hloubky."
     }
   },
   iri: {
-    conc: "Parfémová voda, 15 %", life: 8, sil: 2,
-    top: ["Mandarinka", "Mrkev"],
-    heart: ["Kosatec", "Fialka"],
-    base: ["Pižmo", "Santal"],
-    ing: "Alkohol, parfémová báze, kořen kosatce, fialka, bílé pižmo, santal.",
+    conc: "Toaletní voda", life: 6, sil: 4,
+    top: ["kardamom"],
+    heart: ["lavandin"],
+    base: ["ambra", "ambrové dřevo", "kokos"],
+    ing: "Alkohol, parfémová báze, kardamom, lavandin, ambra, ambrové dřevo, kokos.",
     use: {
-      Den: "Jemná a pudrová. Ke košili a do kanceláře.",
-      Večer: "Zůstává blízko pokožky a voní intimně. Skvělá na večeři ve dvou."
+      Den: "Kořenitý kardamom v hlavě dodá energii pro denní nošení.",
+      Večer: "Hřejivá ambra, dřevo a kokos se večer skvěle rozvinou."
     }
   }
 };
 
-const SZ = [[30, 1], [50, 1.55], [100, 2.4]];
+const SZ = [[30, 1], [50, 1.14], [100, 1.63]];
 const DEL = { zas: ["Zásilkovna – výdejní místo", 79], ppl: ["PPL – doručení domů", 99] };
 const PAY = { card: ["Platební karta (ukázka)", 0], bank: ["Bankovní převod", 0], cod: ["Dobírka", 39] };
 
 // --- 2. ZÁKLADNÍ POMOCNÉ FUNKCE A STAV ---
 
 const $ = s => document.querySelector(s);
-const price = (p, s) => Math.round(p.base * SZ[s][1] / 10) * 10;
+const sizesFor = p => p.sizes || SZ;
+const price = (p, s) => {
+  const currentSizes = sizesFor(p);
+  return Math.round(p.base * currentSizes[s][1] / 10) * 10;
+};
 const kc = n => n.toLocaleString("cs-CZ") + " Kč";
 
 let imgs = {};
@@ -138,51 +165,53 @@ const saveCart = () => {
 
 // --- 3. VYKRESLOVÁNÍ PRODUKTŮ A SCÉNY ---
 
-function bottleSVG(p) {
-  return `
-    <svg viewBox="0 0 100 200" aria-hidden="true">
-      <defs>
-        <linearGradient id="g${p.id}" x1="0" x2="1">
-          <stop offset="0" stop-color="${p.acc}" stop-opacity=".95"/>
-          <stop offset=".5" stop-color="#fff" stop-opacity=".55"/>
-          <stop offset="1" stop-color="${p.acc}" stop-opacity=".8"/>
-        </linearGradient>
-      </defs>
-      <rect x="38" y="6" width="24" height="26" rx="4" fill="#111" opacity=".85"/>
-      <rect x="42" y="30" width="16" height="12" fill="${p.acc}" opacity=".7"/>
-      <rect x="14" y="42" width="72" height="146" rx="14" fill="url(#g${p.id})"/>
-      <rect x="24" y="96" width="52" height="54" rx="3" fill="#fff" opacity=".85"/>
-      <text x="50" y="119" text-anchor="middle" font-family="Syne,sans-serif" font-weight="700" font-size="9" fill="#111">${p.n.split(" ")[0]}</text>
-      <text x="50" y="132" text-anchor="middle" font-family="Syne,sans-serif" font-size="6.5" fill="#111">${p.n.split(" ")[1]}</text>
-      <rect x="20" y="50" width="6" height="128" rx="3" fill="#fff" opacity=".5"/>
-    </svg>`;
-}
 
-const bottleHTML = p => imgs[p.id] ? `<img src="${imgs[p.id]}" alt="${p.n}">` : bottleSVG(p);
+const bottleHTML = p => `<img src="img/${p.id}.png" alt="${p.n}">`;
 
 function build() {
-  $("#scenes").innerHTML = P.map((p, i) => `
-    <div class="scene" data-i="${i}">
-      <div class="name" aria-hidden="true">${p.n.split(" ")[0]}</div>
-      <div class="bottle" id="b${i}">${bottleHTML(p)}</div>
-      ${p.notes.map(([a, b, [x, y]]) => `
-        <button class="note" style="left:${x}%;top:${y}%" tabindex="0">
-          ${a}<small>${b}</small>
-        </button>
-      `).join("")}
-      <div class="copy">
-        <h3>${p.n}</h3>
-        ${p.t}<br>
-        <span style="opacity:.75">${p.d}</span>
+// ... zbytek kódu pokračuje beze změny
+}
+
+function build() {
+  $("#scenes").innerHTML = P.map((p, i) => {
+    // Vykreslení příběhu značky
+    if (p.type === 'brand') {
+      return `
+        <div class="scene" data-i="${i}">
+          <div class="name" aria-hidden="true">${p.n}</div>
+          <div class="story-text">
+            <h3>${p.title}</h3>
+            <p>${p.p1}</p>
+            <p style="opacity:0.7">${p.p2}</p>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Vykreslení klasického parfému
+    return `
+      <div class="scene" data-i="${i}">
+        <div class="name" aria-hidden="true">${p.n.split(" ")[0]}</div>
+        <div class="bottle" id="b${i}">${bottleHTML(p)}</div>
+        ${p.notes.map(([a, b, [x, y]]) => `
+          <button class="note" style="left:${x}%;top:${y}%" tabindex="0">
+            ${a}<small>${b}</small>
+          </button>
+        `).join("")}
+        <div class="copy">
+          <h3>${p.n}</h3>
+          ${p.t}<br>
+          <span style="opacity:.75">${p.d}</span>
+        </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 
   $("#dots").innerHTML = P.map((p, i) => `
     <button aria-label="${p.n}" data-go="${i}"></button>
   `).join("");
 
-  $("#sizes").innerHTML = SZ.map((s, i) => `
+  $("#sizes").innerHTML = sizesFor(P[cur]).map((s, i) => `
     <button data-s="${i}" aria-pressed="${i == size}">${s[0]} ml</button>
   `).join("");
 }
@@ -216,14 +245,30 @@ function frame() {
   R.setProperty("--bg", mix(P[i].bg, P[j].bg, e));
   R.setProperty("--acc", mix(P[i].acc, P[j].acc, e));
   
-  document.querySelectorAll(".scene").forEach((s, k) => {
+document.querySelectorAll(".scene").forEach((s, k) => {
     const d = k - p, a = Math.abs(d), o = Math.max(0, 1 - a * 1.5);
     s.style.opacity = o;
     s.style.visibility = o ? "visible" : "hidden";
-    s.querySelector(".name").style.transform = `translate(-50%,-50%) translateY(${d * -30}vh) scale(${1 - a * 0.15})`;
-    s.querySelector(".bottle").style.transform = `translate(-50%,-50%) translate(${mx * 18}px,${my * 12 + d * 45}vh) rotate(${d * -28 + mx * 6}deg) scale(${1 - a * 0.25})`;
+    
+    // Animace velkého jména na pozadí
+    const nameEl = s.querySelector(".name");
+    if (nameEl) nameEl.style.transform = `translate(-50%,-50%) translateY(${d * -30}vh) scale(${1 - a * 0.15})`;
+    
+    // Animace flakonu (pouze u parfémů)
+    const botEl = s.querySelector(".bottle");
+    if (botEl) botEl.style.transform = `translate(-50%,-50%) translate(${mx * 18}px,${my * 12 + d * 45}vh) rotate(${d * -28 + mx * 6}deg) scale(${1 - a * 0.25})`;
+    
+    // Animace textu příběhu (pomalé připlouvání a reakce na myš)
+    const textEl = s.querySelector(".story-text");
+    if (textEl) textEl.style.transform = `translate(-50%,-50%) translateY(${d * 30}vh) translate(${mx * -12}px, ${my * -12}px)`;
+    
     s.style.pointerEvents = a < 0.5 ? "auto" : "none";
   });
+  
+  // Plynulé skrytí nákupního panelu (#buy) na poslední scéně
+  const buyOp = Math.max(0, Math.min(1, (P.length - 1 - p) * 2));
+  $("#buy").style.opacity = buyOp;
+  $("#buy").style.pointerEvents = buyOp < 0.5 ? "none" : "auto";
   
   const n = Math.round(p);
   if (n !== cur) {
@@ -262,8 +307,21 @@ addEventListener("pointermove", e => {
 
 function sync() {
   document.querySelectorAll("#dots button").forEach((b, i) => b.classList.toggle("on", i == cur));
-  $("#price").textContent = $("#price2").textContent = kc(price(P[cur], size));
-  document.querySelectorAll("#sizes button, #dsizes button").forEach((b, i) => b.setAttribute("aria-pressed", i == size));
+  
+  // Změní cenu jen tehdy, pokud jde o parfém
+  if (P[cur].type !== 'brand') {
+    const currentSizes = sizesFor(P[cur]);
+    size = Math.min(size, currentSizes.length - 1);
+    $("#sizes").innerHTML = currentSizes.map((s, i) => `
+      <button data-s="${i}" aria-pressed="${i == size}">${s[0]} ml</button>
+    `).join("");
+    if ($("#dsizes")) {
+      $("#dsizes").innerHTML = currentSizes.map((s, i) => `
+        <button data-s="${i}" aria-pressed="${i == size}">${s[0]} ml</button>
+      `).join("");
+    }
+    $("#price").textContent = $("#price2").textContent = kc(price(P[cur], size));
+  }
 }
 
 function go(i) {
@@ -336,7 +394,7 @@ $("#add").onclick = e => {
   
   // Zobrazení toast notifikace
   const toast = $("#toast");
-  toast.textContent = `${p.n} (${SZ[size][0]} ml) přidán do košíku`;
+  toast.textContent = `${p.n} (${sizesFor(p)[size][0]} ml) přidán do košíku`;
   toast.classList.add("show");
   clearTimeout(toast.to);
   toast.to = setTimeout(() => toast.classList.remove("show"), 3000);
@@ -385,7 +443,7 @@ function renderCart() {
         <i style="background:linear-gradient(${p.bg},${p.acc})"></i>
         <div>
           <b>${p.n}</b><br>
-          <span class="small">${SZ[l.s][0]} ml · ${kc(price(p, l.s))}</span>
+          <span class="small">${sizesFor(p)[l.s][0]} ml · ${kc(price(p, l.s))}</span>
           <div class="qty">
             <button data-q="${i}" data-d="-1" aria-label="Méně">−</button>
             ${l.q}
@@ -528,7 +586,7 @@ async function submit() {
     cust: { name: g("n"), phone: g("ph"), email: g("em"), addr: g("ad"), city: g("ct"), zip: g("zp") },
     del: v("del"),
     pay: v("pay"),
-    items: cart.map(l => ({ n: pr(l).n, ml: SZ[l.s][0], q: l.q, p: price(pr(l), l.s) })),
+    items: cart.map(l => ({ n: pr(l).n, ml: sizesFor(pr(l))[l.s][0], q: l.q, p: price(pr(l), l.s) })),
     total: t.t
   };
   
@@ -622,7 +680,7 @@ function openD(x, y) {
   
   $("#dbot").innerHTML = bottleHTML(p);
   $("#dname").textContent = p.n.split(" ")[0];
-  $("#dsizes").innerHTML = SZ.map((s, i) => `<button data-s="${i}" aria-pressed="${i == size}">${s[0]} ml</button>`).join("");
+  $("#dsizes").innerHTML = sizesFor(p).map((s, i) => `<button data-s="${i}" aria-pressed="${i == size}">${s[0]} ml</button>`).join("");
   
   dtab = 0;
   duse = "Den";

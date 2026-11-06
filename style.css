@@ -11,7 +11,7 @@
 
 html {
   scroll-padding-top: env(safe-area-inset-top, 0px);
-  scrollbar-gutter: stable; /* UX: Zabraňuje cukání stránky */
+  scrollbar-gutter: stable;
 }
 
 * {
@@ -93,7 +93,7 @@ header {
 
 /* Scéna a animace */
 #track {
-  height: 500vh;
+  height: 600vh; /* Zvýšeno z 500vh pro další sekci (příběh značky) */
   position: relative;
 }
 
@@ -105,18 +105,18 @@ header {
   overflow: hidden;
 }
 
-#glow {
-  position: absolute;
-  width: 60vmax;
-  height: 60vmax;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent);
-  left: 0;
-  top: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.4s, left 0.6s ease-out, top 0.6s ease-out;
-}
+/* Plynulé vlající světlo, optimalizované pro GPU */
+#glow { 
+    position: absolute; 
+    width: 60vmax; height: 60vmax; 
+    border-radius: 50%; 
+    background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent); 
+    left: 0; top: 0; 
+    pointer-events: none; 
+    transform: translate(-50%, -50%); 
+    /* Necháme jen opacity. Pohyb už nebude řídit CSS, ale plynulý JavaScript */ 
+    transition: opacity 0.4s;
+ }
 
 .scene {
   position: absolute;
@@ -137,11 +137,15 @@ header {
   opacity: 0.95;
 }
 
+.scene[data-i="4"] .name {
+  opacity: 0.15; /* Snížená průhlednost pro nadpis Maison Lumen na pozadí */
+}
+
 .bottle {
   position: absolute;
   left: 50%;
   top: 48%;
-  width: min(46vw, 260px);
+  width: min(70vw, 560px);
   aspect-ratio: 1 / 2;
   transform-origin: 50% 90%;
   will-change: transform;
@@ -206,6 +210,27 @@ header {
   margin-bottom: 4px;
 }
 
+/* Příběh značky (nová sekce) */
+.story-text {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: min(90vw, 640px);
+  text-align: center;
+  will-change: transform;
+  z-index: 10;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+}
+.story-text h3 {
+  font: 700 clamp(28px, 6vw, 56px) Syne, 'Helvetica Neue', sans-serif;
+  margin-bottom: 24px;
+}
+.story-text p {
+  font-size: clamp(16px, 2.5vw, 22px);
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
 #buy {
   position: absolute;
   left: 0;
@@ -218,6 +243,7 @@ header {
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(transparent, var(--shade));
+  transition: opacity 0.4s;
 }
 
 .sizes {
@@ -556,7 +582,7 @@ td {
 
 #dbot {
   position: relative;
-  width: min(34vw, 290px);
+  width: min(60vw, 420px);
   aspect-ratio: 1 / 2;
   transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
